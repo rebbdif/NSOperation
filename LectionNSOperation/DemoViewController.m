@@ -17,34 +17,28 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSOperationQueue *mainQueue = [NSOperationQueue mainQueue];
     
     NSOperationQueue *queue = [NSOperationQueue new];
-    // queue.maxConcurrentOperationCount = 1;
-    queue.qualityOfService = NSQualityOfServiceUserInitiated;
     
-    NSInvocationOperation *invocationOperation = [[NSInvocationOperation alloc]initWithTarget:self selector:@selector(someMethod:) object:@"invocation operation"];
-    [mainQueue addOperation:invocationOperation];
+    Operation *operation0  = [Operation new];
+    operation0.queuePriority = NSOperationQueuePriorityLow;
+    operation0.name = @"operation0";
+    [queue addOperation:operation0];
     
-    NSBlockOperation *blockOperation = [NSBlockOperation blockOperationWithBlock:^{
-        [self someMethod:@""];
-    }];
-    [queue addOperationWithBlock:^{
-        [self someMethod:@"block operation"];
-    }];
-    [queue addOperation:blockOperation];
+    Operation *operation1  = [Operation new];
+    operation1.queuePriority = NSOperationQueuePriorityNormal;
+    operation1.name = @"operation1";
+    [queue addOperation:operation1];
     
+    Operation *operation2  = [Operation new];
+    operation2.queuePriority = NSOperationQueuePriorityLow;
+    operation2.name = @"operation2";
+    [queue addOperation:operation2];
     
-    NSBlockOperation *blockOp2 = [NSBlockOperation blockOperationWithBlock:^{
-        sleep(2);
-        NSLog(@"blockOp2");
-    }];
-    [queue addOperation:blockOp2];
-    
-    Operation *operation  = [Operation new];
-    operation.str = @" ";
-    //[queue addOperation:operation];
-    [operation start];
+    Operation *operation3  = [Operation new];
+    operation3.queuePriority = NSOperationQueuePriorityHigh;
+    operation3.name = @"operation3";
+    [queue addOperation:operation3];
     
 }
 

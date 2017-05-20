@@ -19,13 +19,14 @@
 - (void)main {
     
     //work
-    NSLog(@"op%@", [NSThread currentThread]);
-    
-    if (!self.isCancelled) {
+    sleep(2);
+    if (self.isCancelled) {
         return;
     }
-    
     //work
+    NSLog(@"op%@, %@",self.name, [NSThread currentThread]);
+
+    
 }
 
 @end
