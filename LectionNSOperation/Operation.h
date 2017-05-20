@@ -10,4 +10,6 @@
 
 @interface Operation : NSOperation
 
+@property (strong, nonatomic) NSString *str;
+
 @end

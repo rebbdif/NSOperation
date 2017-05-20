@@ -10,4 +10,22 @@
 
 @implementation Operation
 
+- (void)start{
+    
+    [self main];
+    
+}
+
+- (void)main {
+    
+    //work
+    NSLog(@"op%@", [NSThread currentThread]);
+    
+    if (!self.isCancelled) {
+        return;
+    }
+    
+    //work
+}
+
 @end

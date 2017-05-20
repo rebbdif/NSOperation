@@ -7,6 +7,7 @@
 //
 
 #import "DemoViewController.h"
+#import "Operation.h"
 
 @interface DemoViewController ()
 
@@ -33,19 +34,18 @@
     }];
     [queue addOperation:blockOperation];
     
-    NSOperation *operation = [NSOperation new];
-    operation.completionBlock = ^{
-        [self someMethod:@"operation"];
-    };
-    [blockOperation addDependency:operation];
-    [queue addOperation:operation];
     
     NSBlockOperation *blockOp2 = [NSBlockOperation blockOperationWithBlock:^{
         sleep(2);
         NSLog(@"blockOp2");
     }];
-    [invocationOperation addDependency:blockOp2];
     [queue addOperation:blockOp2];
+    
+    Operation *operation  = [Operation new];
+    operation.str = @" ";
+    //[queue addOperation:operation];
+    [operation start];
+    
 }
 
 - (void)someMethod:(NSString *)str {
